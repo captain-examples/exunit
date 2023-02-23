@@ -25,3 +25,12 @@ config :logger, level: :warn
 
 # Initialize plugs at runtime for faster test compilation
 config :phoenix, :plug_init_mode, :runtime
+
+config :junit_formatter,
+  report_dir: Path.expand("../tmp/junit", __DIR__),
+  project_dir: Path.expand("..", __DIR__),
+  automatic_create_dir?: true,
+  print_report_file: true,
+  prepend_project_name?: true,
+  include_filename?: true,
+  include_file_line?: true
