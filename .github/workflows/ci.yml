@@ -1,0 +1,27 @@
+name: 'Captain CI example'
+on:
+  pull_request:
+  push:
+    paths-ignore:
+      - README.md
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: erlef/setup-beam@v1
+        with:
+          otp-version: "25"
+          elixir-version: "1.14"
+      - run: mix deps.get
+      - uses: rwx-research/setup-captain@v1
+      - run: |
+          captain run \
+            --suite-id captain-examples-exunit \
+            --test-results "tmp/junit/*.xml" \
+            --language Elixir \
+            --framework ExUnit \
+            -- \
+            mix test
+        env:
+          RWX_ACCESS_TOKEN: ${{ secrets.RWX_ACCESS_TOKEN }}
