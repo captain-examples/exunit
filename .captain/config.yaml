@@ -1,0 +1,7 @@
+test-suites:
+  captain-examples-exunit:
+    command: mix test
+    results:
+      language: Elixir
+      framework: ExUnit
+      path: tmp/junit/*.xml
