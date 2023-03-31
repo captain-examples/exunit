@@ -15,12 +15,6 @@ jobs:
           elixir-version: "1.14"
       - run: mix deps.get
       - uses: rwx-research/setup-captain@v1
-      - run: |
-          captain run \
-            --suite-id captain-examples-exunit \
-            --test-results "tmp/junit/*.xml" \
-            --language Elixir \
-            --framework ExUnit \
-            -- mix test
+      - run: captain run captain-examples-exunit
         env:
           RWX_ACCESS_TOKEN: ${{ secrets.RWX_ACCESS_TOKEN }}
